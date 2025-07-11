@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { db } from "../../db/index.js";
 import { blogs } from "../../src/schema.js";
-import dynamic from 'next/dynamic';
+//import dynamic from 'next/dynamic';
 
 export default async function BlogList() {
   const allBlogs = await db.select().from(blogs);
