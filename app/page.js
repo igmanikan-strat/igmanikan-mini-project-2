@@ -9,7 +9,7 @@ export default async function HomePage() {
     <main className="min-h-screen bg-gradient-to-br from-[#f6f3ff] to-[#e9e4fa] px-6 py-10">
       <div className="max-w-6xl mx-auto space-y-10 text-center">
         <div className="space-y-4">
-          <h1 className="text-4xl font-bold text-[var(--brand-color)]">Everyone's Blog</h1>
+          <h1 className="text-4xl font-bold text-[var(--brand-color)]">All Blogs</h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Create and explore blogs made by you and other people.
           </p>
