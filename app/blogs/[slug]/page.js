@@ -1,12 +1,12 @@
 import { db } from "../../../db/index.js";
 import { blogs, comments } from "../../../src/schema.js";
 import { eq } from "drizzle-orm";
-import { addComment } from "../../../app/actions/addComment";
+//import { addComment } from "../../../app/actions/addComment";
 import { deleteBlog } from "../../../app/actions/deleteBlog";
 import { notFound } from "next/navigation";
-import { Link } from 'next/link';
+//import { Link } from 'next/link';
 import { updateComment, deleteComment } from "../../../app/actions/blogActions";
-import CommentItem from '../../components/CommentItem'; // adjust path if needed
+//import CommentItem from '../../components/CommentItem'; // adjust path if needed
 import CommentFormWrapper from './CommentFormWrapper';
 import ReactMarkdown from 'react-markdown';
 
