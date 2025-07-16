@@ -1,16 +1,18 @@
 import { db } from "../../../db/index.js";
 import { blogs, comments } from "../../../src/schema.js";
 import { eq } from "drizzle-orm";
-//import { addComment } from "../../../app/actions/addComment";
+import { addComment } from "../../../app/actions/addComment";
 import { deleteBlog } from "../../../app/actions/deleteBlog";
 import { notFound } from "next/navigation";
-//import { Link } from 'next/link';
+import { Link } from 'next/link';
 import { updateComment, deleteComment } from "../../../app/actions/blogActions";
-//import CommentItem from '../../components/CommentItem'; // adjust path if needed
+import CommentItem from '../../components/CommentItem'; // adjust path if needed
 import CommentFormWrapper from './CommentFormWrapper';
+import ReactMarkdown from 'react-markdown';
 
 export default async function BlogDetail({ params }) {
   const result = await db.select().from(blogs).where(eq(blogs.slug, params.slug));
+  
   const post = result[0];
   if (!post) return notFound();
 
@@ -19,13 +21,32 @@ export default async function BlogDetail({ params }) {
     .from(comments)
     .where(eq(comments.blogId, post.id))
     .orderBy(comments.createdAt);
-
+    
+  const markdownWithoutMainTitle = post.content.replace(/^# .*\n/, '');
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f6f3ff] to-[#e9e4fa] px-6 py-10 text-[var(--text-dark)] font-poppins">
       <div className="max-w-3xl mx-auto bg-white p-10 rounded-2xl shadow-md space-y-10">
         <div>
           <h1 className="text-4xl font-bold mb-4 text-[var(--brand-color)]">{post.title}</h1>
-          <p className="text-gray-800 whitespace-pre-line">{post.content}</p>
+          <div className="prose prose-lg max-w-none text-gray-800">
+
+
+            <ReactMarkdown
+              components={{
+                h2: ({ node, ...props }) => (
+                  <h2 className="text-2xl font-semibold mt-6 mb-2 text-[var(--brand-color)]" {...props} />
+                ),
+                h3: ({ node, ...props }) => (
+                  <h3 className="text-xl font-medium mt-4 mb-2 text-gray-700" {...props} />
+                ),
+                p: ({ node, ...props }) => (
+                  <p className="text-base leading-relaxed text-gray-800 mb-4" {...props} />
+                ),
+              }}
+            >
+              {markdownWithoutMainTitle}
+            </ReactMarkdown>
+          </div>
         </div>
 
 
