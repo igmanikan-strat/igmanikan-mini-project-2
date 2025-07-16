@@ -33,15 +33,9 @@ export default async function BlogDetail({ params }) {
 
             <ReactMarkdown
               components={{
-                h2: ({ node, ...props }) => (
-                  <h2 className="text-2xl font-semibold mt-6 mb-2 text-[var(--brand-color)]" {...props} />
-                ),
-                h3: ({ node, ...props }) => (
-                  <h3 className="text-xl font-medium mt-4 mb-2 text-gray-700" {...props} />
-                ),
-                p: ({ node, ...props }) => (
-                  <p className="text-base leading-relaxed text-gray-800 mb-4" {...props} />
-                ),
+                h1: (props) => <h1 className="text-4xl font-bold" {...props} />,
+                h2: (props) => <h2 className="text-2xl font-semibold" {...props} />,
+                p: (props) => <p className="mb-4" {...props} />,
               }}
             >
               {markdownWithoutMainTitle}
